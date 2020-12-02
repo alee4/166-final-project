@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	</head>
+	<body>
+		<div class="register">
+			<h1>Register A New Account</h1>
+
+			<div class="links">
+				<a href="{{ url_for('login') }}" class="active">Login</a>
+				<a href="{{ url_for('register') }}" class="active">Register :)</a>
+				<a href="{{ url_for('generateStrongPassword') }}" class="active">Generate Strong Password</a>
+			</div>
+
+			<form action="{{ url_for('register') }}" method="post">
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="New Username" id="username" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="New Password" id="password" required>
+				<input type="submit" value="register">
+			</form>
+
+            <p id="textForPass" name="textForPass" rows="4" cols="50">
+                Remember, password must be between 8 and 25 characters long, contain at least 1 lower
+				case, one upper case, one number, and one special character ("?", "!", "#", "$", "%", "&", "*")
+            </p>
+
+
+			{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+
+
+
+		</div>
+	</body>
+</html>
